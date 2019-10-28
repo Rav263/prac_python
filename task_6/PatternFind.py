@@ -24,9 +24,8 @@ while index < len(string):
         else:
             #print("INDEX=", index)
             if string[index] != pattern[index_in_pat]:
-                if flg:
-                    index -= 1
-                    index_in_pat -= 1
+                index = start_index
+                index_in_pat = 0
                 break
             flg = False
 
