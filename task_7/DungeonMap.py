@@ -1,7 +1,6 @@
-dictionary = dict([])
+from collections import defaultdict
 
-start = ""
-end = ""
+dictionary = defaultdict(list)
 
 while True:
     words = input().split()
@@ -10,14 +9,9 @@ while True:
         start = words[0]
         end = input()
         break
-
-    if words[0] not in dictionary:
-        dictionary[words[0]] = []
-    if words[1] not in dictionary:
-        dictionary[words[1]] = []
+    
     dictionary[words[0]].append(words[1])
     dictionary[words[1]].append(words[0])
-
 
 
 was_there = set()

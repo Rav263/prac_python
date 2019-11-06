@@ -1,10 +1,8 @@
-def checkhash(ran, fun_hash, mod):
-    hashs = dict()
-    for i in ran:
-        now_hash = fun_hash(i) % mod
-        if now_hash not in hashs:
-            hashs[now_hash] = 0
+from collections import defaultdict
 
-        hashs[now_hash] += 1
+def checkhash(ran, fun_hash, mod):
+    hashs = defaultdict(int)
+    for i in ran:
+        hashs[fun_hash(i) % mod] += 1
 
     return (max(hashs.values()), min(hashs.values()))
