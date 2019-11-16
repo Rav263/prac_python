@@ -1,13 +1,24 @@
 from collections import Counter
 from math import ceil
 
-def xehs(string):
-    byte_string = bytes(string, "ASCII") 
+#def xehs(string):
+#    byte_string = bytes(string, "ASCII") 
     #new_list = bytes((now_byte - 32) for now_byte in reversed(byte_string))
     #new_list = bytes(now_byte >> 2 for now_byte in new_list)
     #return int.from_bytes(new_list, "little")
 
-    return sum(((byte_string[i]-32) << i*6) for i in range(len(byte_string)))
+#    return sum(((byte_string[i]-32) << i*6) for i in range(len(byte_string)))
+def xehs(s):
+    n = 0
+    
+    for c in s:
+        d = ord(c) - 32
+        n = n*64 | d
+
+    return n
+
+
+
 
 def shex(number):
     list_of_bytes = list()
