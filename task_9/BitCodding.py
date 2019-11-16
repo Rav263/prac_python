@@ -3,16 +3,18 @@ from math import ceil
 
 def xehs(string):
     byte_string = bytes(string, "ASCII") 
+    #new_list = bytes((now_byte - 32) for now_byte in reversed(byte_string))
+    #new_list = bytes(now_byte >> 2 for now_byte in new_list)
+    #return int.from_bytes(new_list, "little")
 
-    return sum(64**(len(byte_string) - i - 1) * (byte_string[i] - 32) for i in range(len(byte_string)))
-
+    return sum(((byte_string[i]-32) << i*6) for i in range(len(byte_string)))
 
 def shex(number):
     list_of_bytes = list()
     
     while number > 0:
-        list_of_bytes.append(32 + number % 64)
-        number //= 64
+        list_of_bytes.append(32 + (number & 63))
+        number >>= 6
     
     return bytes(reversed(list_of_bytes)).decode("ASCII")
 
