@@ -11,6 +11,9 @@ black = 0, 0, 0
 def convert(x, y):
     return (math.floor(x * DX) , math.floor(y * DY))
 
+
+pygame.time.set_timer(pygame.USEREVENT, 10)
+
 screen = pygame.display.set_mode(screen_size)
 
 ball = pygame.image.load("intro_ball.gif")
@@ -19,20 +22,20 @@ x, y = size[0] / 2, size[1] / 2
 ball_rect = ball.get_rect();
 
 while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT: sys.exit()
+    event = pygame.event.wait()
+    if event.type == pygame.QUIT: sys.exit()
+    elif event.type == pygame.USEREVENT:
+        x, y = x + speed[0], y + speed[1]
 
-    x, y = x + speed[0], y + speed[1]
+        new_coords = convert(x, y)
+        #print(x, y, new_coords)
 
-    new_coords = convert(x, y)
-    #print(x, y, new_coords)
+        ball_rect.center = new_coords
 
-    ball_rect.center = new_coords
-
-    if ball_rect.left < 0 or ball_rect.right > width:
-        speed[0] = -speed[0]
-    if ball_rect.top < 0 or ball_rect.bottom > height:
-        speed[1] = -speed[1]
+        if ball_rect.left < 0 or ball_rect.right > width:
+            speed[0] = -speed[0]
+        if ball_rect.top < 0 or ball_rect.bottom > height:
+            speed[1] = -speed[1]
 
     screen.fill(black)
     screen.blit(ball, ball_rect)
